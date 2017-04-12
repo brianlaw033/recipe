@@ -12,7 +12,7 @@ class Recipe < ActiveRecord::Base
       self.update(:instruction =>instruction)
     end
     if new_tag != ""
-      new_tag = Tag.create({:name => new_tag})
+      new_tag = Tag.first_or_create({:name => new_tag})
       RecipeTag.create({:recipe => self, :tag => new_tag})
     end
     if tag_id != ""
@@ -20,7 +20,7 @@ class Recipe < ActiveRecord::Base
       RecipeTag.create({:recipe => self, :tag => tag})
     end
     if new_ingredient != ""
-      new_ingredient = Ingredient.create({:name => new_ingredient})
+      new_ingredient = Ingredient.first_or_create({:name => new_ingredient})
       if ingredient_ids != nil
         ingredient_ids.push(new_ingredient.id)
       else
