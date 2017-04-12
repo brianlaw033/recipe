@@ -1,0 +1,79 @@
+<div class='panel panel-info col-sm-12'>
+  <div class="panel-heading">
+    <h3 class="panel-title text-center">
+       Top Recipes
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <% if @top_recipes.any?() %>
+      <ul class='list-unstyled'>
+        <% @top_recipes.each do |recipe| %>
+          <li><a href="/recipe/<%= recipe['id'] %>"><%= recipe['name'] %></a></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <h3>None</h3>
+    <% end %>
+  </div>
+</div>
+
+<div class='panel panel-info col-sm-12'>
+  <div class="panel-heading">
+    <h3 class="panel-title text-center">
+       All Recipes
+    </h3>
+  </div>
+  <div class="panel-body">
+    <form action="/tag" method='post' style='float: left;'>
+      <select id='tag_id' name='tag_id' type='text'>
+        <option value="/"> By Tags</option>
+        <% @tags.each() do |tag| %>
+          <option value="/tag/<%= tag.id()%>"> <%= tag.name() %> </option>
+        <% end %>
+      </select>
+      <button class='btn btn-primary'>
+        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+      </button>
+    </form>
+
+    <form action="/ingredient" method='post'>
+      <select id='ingredient_id' name='ingredient_id' type='text'>
+        <option value="/"> By Ingredients</option>
+        <% @ingredients.each() do |ingredient| %>
+          <option value="/ingredient/<%= ingredient.id()%>"> <%= ingredient.name() %> </option>
+        <% end %>
+      </select>
+      <button class='btn btn-primary'>
+        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+      </button>
+    </form>
+
+    <% if @recipes.any?() %>
+      <ul class='list-unstyled'>
+        <% @recipes.each do |recipe| %>
+          <li><a href="/recipe/<%= recipe.id() %>"><%= recipe.name() %></a></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <h3>None</h3>
+    <% end %>
+  </div>
+</div>
+
+<div class='panel panel-info col-sm-12'>
+  <div class="panel-heading">
+    <h3 class="panel-title text-center">
+       Add Recipes
+    </h3>
+  </div>
+  <div class="panel-body">
+    <form action="/new/recipe" method="post">
+      New Recipe:
+      <input id='name' name='name' type = 'text' />
+      <button class='btn btn-success' id ='addDivision' type="submit">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class='panel panel-info col-sm-12'>
+  <div class="panel-heading">
+    <h3 class="panel-title text-center" style='height: 40px;'>
+      <a href="/">
+        <button class='btn btn-primary' style='float: left; margin-right: 10px;'>
+          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+        </button>
+      </a>
+      Recipes with #<%=@tag.name%>
+      <form action="/delete/tag/<%=@tag.id%>" method="post" style='float: right;'>
+        <input type="hidden" name="_method" value="delete">
+        <button type='submit' class='btn btn-danger'>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+      </form>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <% if @tag.recipes.any?() %>
+      <ul class='list-unstyled'>
+        <% @tag.recipes.each do |recipe| %>
+          <li><a href="/recipe/<%= recipe.id() %>"><%= recipe.name() %> </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <h3>None</h3>
+    <% end %>
+  </div>
+</div>
